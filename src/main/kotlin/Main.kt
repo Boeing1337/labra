@@ -4,13 +4,17 @@ package ru.synergy
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 fun main() {
-    val testArray = intArrayOf(1, -2, 3, 0, -5, 7, 4)
-    val (sum, count) = findPositiveSumAndCount(testArray)
+    val (sum, count) = findPositiveSumAndCount(intArrayOf(1, -2, 3, 0, -5, 7, 4))
     println("Сумма положительных элементов: $sum")
     println("Количество положительных элементов: $count")
+
+    val threshold = 4
+    val (count2, product) = countAndProductExceeding(intArrayOf(1, 5, 3, 8, 2, 9), threshold)
+    println("Количество элементов > $threshold: $count2")
+    println("Их произведение: $product")
 }
 
-public fun findPositiveSumAndCount(arr: IntArray): Pair<Int, Int> {
+fun findPositiveSumAndCount(arr: IntArray): Pair<Int, Int> {
     var sum = 0
     var count = 0
 
@@ -22,4 +26,24 @@ public fun findPositiveSumAndCount(arr: IntArray): Pair<Int, Int> {
     }
 
     return Pair(sum, count)
+}
+
+fun countAndProductExceeding(arr: IntArray, threshold: Int): Pair<Int, Long> {
+    var count = 0
+    var product: Long = 1
+    var hasExceeding = false
+
+    for (element in arr) {
+        if (element > threshold) {
+            count++
+            product *= element.toLong()
+            hasExceeding = true
+        }
+    }
+
+    if (!hasExceeding) {
+        product = 0 // Произведение = 0, если нет подходящих элементов
+    }
+
+    return Pair(count, product)
 }
