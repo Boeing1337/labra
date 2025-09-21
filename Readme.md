@@ -32,24 +32,28 @@ flowchart TD
 ```
 ---
 config:
-layout: dagre
+  layout: dagre
 ---
 flowchart TD
-A["Начало"] --> B["Ввод массива A размерности N и порога B"]
-B --> C["count = 0, product = 1, hasExceeding = false"]
-C --> D["i = 0"]
-D --> E{"i &lt; N?"}
-E -- no --> F{"hasExceeding?"}
-F -- yes --> G["product = product"]
-F -- no --> H["product = 0"]
-G --> I["Вывод count, product"]
-H --> I
-I --> J["Конец"]
-E -- yes --> K["A[i] &gt; B?"]
-K -- yes --> L["count = count + 1"]
-L --> M["product = product * Ai"]
-M --> N["hasExceeding = true"]
-N --> O["i = i + 1"]
-K -- no --> O
-O --> E
+    A["Начало"] --> B["Ввод массива A размерности N и порога B"]
+    B --> C["count = 0, product = 1, hasExceeding = false"]
+    C --> D["i = 0"]
+    D --> E{"i &lt; N?"}
+    E -- нет --> F{"hasExceeding"}
+    F -- да --> G["product = product"]
+    F -- нет --> H["product = 0"]
+    G --> I["Вывод count, product"]
+    H --> I
+    I --> J["Конец"]
+    E -- да --> K["A[i] &gt; B?"]
+    K -- да --> L["count = count + 1"]
+    L --> M["product = product * A[i]"]
+    M --> N["hasExceeding = true"]
+    N --> O["i = i + 1"]
+    K -- нет --> O
+    O --> E
+    A@{ shape: rounded}
+    I@{ shape: lean-r}
+    J@{ shape: rounded}
+
 ```
